@@ -67,12 +67,11 @@ export function PanelHome() {
 
 
   return (
-    <section className='flex flex-col items-center gap-8 w-full max-w-[70rem] my-0 mx-auto py-0 px-4'>
+    <section className='flex flex-col gap-8 w-full max-w-[70rem] h-screen my-0 mx-auto py-0 px-4'>
       <div className='grid grid-cols-3 mt-20 gap-20 w-full'>
         <AccountEntry transactions={transactions} cpf={cpf} />
         <AccountWithdrawal transactions={transactions} cpf={cpf} />
         <AccountBalance cpf={cpf} token={token} />
-
       </div>
 
       <div className='flex flex-col w-full'>
@@ -100,36 +99,38 @@ export function PanelHome() {
         </div>
       </div>
 
-      <table className='w-full border-spacing-[0 0.5rem]'>
-        <thead >
-          <tr className='text-left bg-zinc-800 text-zinc-200'>
-            <th className='py-5 px-8 w-1/2 rounded-l-md '>Recebeu</th>
-            <th className='py-5 px-9 '>Valor</th>
-            <th className='py-5 px-8 '>Gastou</th>
-            <th className='py-5 px-8 rounded-r-md '>Data da Transação</th>
-          </tr>
-        </thead>
-        <tbody>
-          {transactions?.map((transaction) => (
-            <tr key={transaction.id}>
-              <td className='py-5 px-8 bg-zinc-100 w-1/2 rounded-l-md text-zinc-500'>{transaction.nome}</td>
-              {transaction.cpf === cpf ? (
-                <td className='text-blue-700 bg-zinc-100 py-5 px-8' >{new Intl.NumberFormat("pt-BR", {
-                  style: "currency",
-                  currency: "BRL"
-                }).format(transaction.value)}</td>
-              ) : (
-                <td className='text-red-500 bg-zinc-100 py-5 px-8' >- {new Intl.NumberFormat("pt-BR", {
-                  style: "currency",
-                  currency: "BRL"
-                }).format(transaction.value)}</td>
-              )}
-              <td className='py-5 px-8 bg-zinc-100 text-zinc-500'>{transaction.nomecliente}</td>
-              <td className='py-5 px-8 bg-zinc-100 rounded-r-md text-zinc-500'>{new Intl.DateTimeFormat("pt-Br").format(new Date(transaction.createdAt))}</td>
+      <main className='w-full max-w-[70rem] overflow-y-auto mb-5 h-[29rem] changeScroll'>
+        <table className='w-full border-spacing-[0 0.5rem] '>
+          <thead >
+            <tr className='text-left bg-zinc-800 text-zinc-200'>
+              <th className='py-5 px-8 w-1/2 rounded-l-md '>Recebeu</th>
+              <th className='py-5 px-9 '>Valor</th>
+              <th className='py-5 px-8 '>Gastou</th>
+              <th className='py-5 px-8 rounded-r-md '>Data da Transação</th>
             </tr>
-          ))}
-        </tbody>
-      </table>
+          </thead>
+          <tbody>
+            {transactions?.map((transaction) => (
+              <tr key={transaction.id} className="border-b-[2px]">
+                <td className='py-5 px-8 bg-zinc-100 w-1/2 rounded-l-md text-zinc-500'>{transaction.nome}</td>
+                {transaction.cpf === cpf ? (
+                  <td className='text-blue-700 bg-zinc-100 py-5 px-8' >{new Intl.NumberFormat("pt-BR", {
+                    style: "currency",
+                    currency: "BRL"
+                  }).format(transaction.value)}</td>
+                ) : (
+                  <td className='text-red-500 bg-zinc-100 py-5 px-8' >- {new Intl.NumberFormat("pt-BR", {
+                    style: "currency",
+                    currency: "BRL"
+                  }).format(transaction.value)}</td>
+                )}
+                <td className='py-5 px-8 bg-zinc-100 text-zinc-500'>{transaction.nomecliente}</td>
+                <td className='py-5 px-8 bg-zinc-100 rounded-r-md text-zinc-500'>{new Intl.DateTimeFormat("pt-Br").format(new Date(transaction.createdAt))}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </main>
 
     </section>
   )
