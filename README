@@ -1,0 +1,5 @@
+Backend:
+  Para iniciar a API, entre na pasta do projeto com a linha de comando "cd .\backend\", dentro da pasta dê o comando 'yarn' para instalar as dependencias do projeto, no arquivo '.env' mude o banco de dados de acordo com a qual você tem instalado na sua maquina, e rode o comando 'yarn prisma generate' e logo em seguida 'yarn prisma migrate dev' para criar as tabelas do banco de dados, e para rodar a api use o comando 'yarn dev'.
+
+Frontend:
+  Para iniciar o frontend, entre na parta com o comando 'cd .\internal-tranfers\', instale as dependencias com 'yarn', e rode o projeto com 'yarn dev'
